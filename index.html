@@ -341,6 +341,169 @@
     .stars span { font-size: 22px; }
     .cta-footer { font-size: 13px; margin-top: 26px; }
   }
+
+  /* ─── SECTION 3: PROVAS SOCIAIS ─── */
+  .provas-section {
+    background: var(--yellow);
+    background-image: radial-gradient(rgba(0,0,0,0.10) 2px, transparent 2px);
+    background-size: 32px 32px;
+    padding: 52px 0 60px;
+    text-align: center;
+    overflow: hidden;
+  }
+
+  .provas-title {
+    font-family: 'Cabinet Grotesk', sans-serif;
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--charcoal);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 40px;
+    padding: 0 20px;
+  }
+
+  .coverflow {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    perspective: 1000px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .cf-item {
+    position: absolute;
+    width: 220px;
+    height: 220px;
+    border-radius: 14px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.6);
+    border: 3px solid #222;
+  }
+
+  .cf-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    pointer-events: none;
+  }
+
+  .cf-item.active {
+    transform: translateX(0) scale(1) rotateY(0deg);
+    z-index: 10;
+    border-color: #E01F1F;
+    box-shadow: 0 0 0 4px #E01F1F44, 0 16px 48px rgba(224,31,31,0.4);
+  }
+
+  .cf-item.prev1 {
+    transform: translateX(-200px) scale(0.78) rotateY(40deg);
+    z-index: 7;
+    filter: brightness(0.55);
+  }
+
+  .cf-item.prev2 {
+    transform: translateX(-340px) scale(0.58) rotateY(55deg);
+    z-index: 4;
+    filter: brightness(0.35);
+  }
+
+  .cf-item.next1 {
+    transform: translateX(200px) scale(0.78) rotateY(-40deg);
+    z-index: 7;
+    filter: brightness(0.55);
+  }
+
+  .cf-item.next2 {
+    transform: translateX(340px) scale(0.58) rotateY(-55deg);
+    z-index: 4;
+    filter: brightness(0.35);
+  }
+
+  .cf-item.hidden {
+    transform: translateX(0) scale(0.4) rotateY(70deg);
+    z-index: 1;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .cf-reflection {
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    background: linear-gradient(to bottom, rgba(255,255,255,0.08), transparent);
+    border-radius: 0 0 14px 14px;
+    transform: scaleY(-1);
+    opacity: 0.3;
+    pointer-events: none;
+  }
+
+  .cf-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    margin-top: 32px;
+  }
+
+  .cf-btn {
+    background: #E01F1F;
+    color: #fff;
+    border: 2px solid #000;
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    font-size: 20px;
+    font-weight: 900;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 4px 4px 0 #000;
+    transition: transform 0.15s, box-shadow 0.15s;
+    user-select: none;
+  }
+
+  .cf-btn:active {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0 #000;
+  }
+
+  .cf-counter {
+    font-family: 'Cabinet Grotesk', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: #888;
+    min-width: 50px;
+  }
+
+  .cf-dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 20px;
+  }
+
+  .cf-dots span {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #333;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: inline-block;
+  }
+
+  .cf-dots span.active {
+    background: #E01F1F;
+    transform: scale(1.4);
+  }
 </style>
 </head>
 <body>
@@ -362,7 +525,7 @@
 
     <!-- Banner completo (imagem) -->
     <div class="banner-img-wrap">
-      <img src="https://i.imgur.com/5wIgz57.png" alt="Concorra a 160 dos Sonhos - Honda CG" loading="eager">
+      <img src="https://i.imgur.com/Zf6dlS3.webp" alt="Concorra a 160 dos Sonhos - Honda CG" loading="eager">
     </div>
 
   </section>
@@ -373,7 +536,7 @@
   <section class="cta-section">
 
     <div class="cta-card">
-      <p class="cta-text">Entre no grupo e</p>
+      <p class="cta-text">Entre no canal e</p>
       <p class="cta-text-green">CONCORRA</p>
       <p class="cta-text-green2">A UM <span class="highlight-iphone">IPHONE 13</span> TOTALMENTE GRATUITO 👇</p>
 
@@ -386,6 +549,54 @@
       <p class="cta-footer">PROMOÇÃO VÁLIDA POR TEMPO LIMITADO</p>
     </div>
 
+  </section>
+
+  <!-- ═══════════════════════════════════ -->
+  <!--      SEÇÃO 3: PROVAS SOCIAIS        -->
+  <!-- ═══════════════════════════════════ -->
+  <section class="provas-section">
+    <h2 class="provas-title">ELES<br><span class="cta-text-green">ACREDITARAM</span><br>E GANHARAM!</h2>
+
+    <div class="coverflow" id="coverflow">
+      <div class="cf-item" data-index="0">
+        <img src="https://i.imgur.com/6q1MQYW.png" alt="Prova 1">
+        <div class="cf-reflection"></div>
+      </div>
+      <div class="cf-item" data-index="1">
+        <img src="https://i.imgur.com/LKsHJTI.png" alt="Prova 2">
+        <div class="cf-reflection"></div>
+      </div>
+      <div class="cf-item" data-index="2">
+        <img src="https://i.imgur.com/RUEW1m0.png" alt="Prova 3">
+        <div class="cf-reflection"></div>
+      </div>
+      <div class="cf-item" data-index="3">
+        <img src="https://i.imgur.com/p5R8rqP.png" alt="Prova 4">
+        <div class="cf-reflection"></div>
+      </div>
+      <div class="cf-item" data-index="4">
+        <img src="https://i.imgur.com/qW0GXzp.png" alt="Prova 5">
+        <div class="cf-reflection"></div>
+      </div>
+      <div class="cf-item" data-index="5">
+        <img src="https://i.imgur.com/OKIsvDG.png" alt="Prova 6">
+        <div class="cf-reflection"></div>
+      </div>
+      <div class="cf-item" data-index="6">
+        <img src="https://i.imgur.com/oEfE3z0.png" alt="Prova 7">
+        <div class="cf-reflection"></div>
+      </div>
+      <div class="cf-item" data-index="7">
+        <img src="https://i.imgur.com/Gx2tUzP.png" alt="Prova 8">
+        <div class="cf-reflection"></div>
+      </div>
+    </div>
+
+    <p class="cta-footer" style="margin-top: 24px;">VOCÊ PODE SER O PRÓXIMO 👇🏼</p>
+
+    <div style="padding: 32px 24px 0;">
+      <a href="https://t.me/+3C7LvYC5XEwwMWQx" class="cta-btn"><img src="https://i.imgur.com/PjhaRCY.png" style="height:20px;vertical-align:middle;margin-right:8px;"> QUERO PARTICIPAR AGORA</a>
+    </div>
   </section>
 
 </div>
@@ -439,6 +650,47 @@
       }
     });
   });
+
+  // Coverflow 3D — autoplay
+  (function() {
+    const items = Array.from(document.querySelectorAll('.cf-item'));
+    const total = items.length;
+    let current = 0;
+    let timer;
+
+    const dotsEl = null;
+
+    function goTo(index) {
+      current = (index + total) % total;
+      items.forEach((item, i) => {
+        const diff = i - current;
+        item.className = 'cf-item';
+        if (diff === 0)       item.classList.add('active');
+        else if (diff === -1) item.classList.add('prev1');
+        else if (diff === -2) item.classList.add('prev2');
+        else if (diff === 1)  item.classList.add('next1');
+        else if (diff === 2)  item.classList.add('next2');
+        else                  item.classList.add('hidden');
+      });
+    }
+
+    function resetTimer() {
+      clearInterval(timer);
+      timer = setInterval(() => goTo(current + 1), 2500);
+    }
+
+    // Swipe touch
+    let touchStartX = 0;
+    const cf = document.getElementById('coverflow');
+    cf.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+    cf.addEventListener('touchend', e => {
+      const diff = touchStartX - e.changedTouches[0].clientX;
+      if (Math.abs(diff) > 40) { goTo(current + (diff > 0 ? 1 : -1)); resetTimer(); }
+    });
+
+    goTo(0);
+    resetTimer();
+  })();
 
   const style = document.createElement('style');
   style.textContent = `
