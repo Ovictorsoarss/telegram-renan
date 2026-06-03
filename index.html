@@ -46,6 +46,7 @@
     font-family: 'Satoshi', sans-serif;
     font-weight: 500;
     overflow-x: hidden;
+    padding-top: 46px;
   }
 
   .page-wrapper {
@@ -54,17 +55,17 @@
     background: var(--yellow);
     position: relative;
     overflow: hidden;
-    border-left: 2px solid var(--black);
-    border-right: 2px solid var(--black);
+    border: none;
   }
 
   /* ─── SECTION 1: BANNER ─── */
   .banner {
     background: var(--yellow);
+    background-image: radial-gradient(rgba(0,0,0,0.10) 2px, transparent 2px);
+    background-size: 32px 32px;
     position: relative;
     overflow: hidden;
     padding: 0;
-    border-bottom: 2px solid var(--black);
   }
 
   .banner-img-wrap {
@@ -73,31 +74,34 @@
     line-height: 0;
     overflow: hidden;
     animation: motoIn 0.9s cubic-bezier(.22,1,.36,1) 0.2s both;
+    width: 100%;
   }
 
-  .banner-img-wrap img {
+  .video-wrap {
+    position: relative;
+    width: 72%;
+    max-width: 280px;
+    margin: 32px auto;
+    padding-bottom: calc(72% * 1.7778);
+    background: #000;
+    border-radius: 24px;
+    overflow: hidden;
+    border: none;
+    box-shadow: none;
+  }
+
+  .video-wrap iframe {
+    position: absolute;
+    inset: 0;
     width: 100%;
+    height: 100%;
+    border: none;
     display: block;
   }
 
   @keyframes motoIn {
     from { opacity: 0; transform: translateY(30px); }
     to   { opacity: 1; transform: translateY(0); }
-  }
-
-  /* Notas de dinheiro flutuantes */
-  .money-note {
-    position: absolute;
-    font-size: 28px;
-    z-index: 3;
-    pointer-events: none;
-    animation: floatNote var(--dur, 3s) ease-in-out var(--delay, 0s) infinite alternate;
-    opacity: 0.9;
-  }
-
-  @keyframes floatNote {
-    from { transform: translateY(0) rotate(var(--rot-from, -8deg)); }
-    to   { transform: translateY(-12px) rotate(var(--rot-to, 8deg)); }
   }
 
   /* ─── SECTION 2: CTA ─── */
@@ -286,6 +290,7 @@
     body {
       align-items: center;
       padding: 40px 24px;
+      padding-top: calc(46px + 40px);
       background-image: radial-gradient(rgba(255,255,255,0.06) 2px, transparent 2px);
       background-size: 36px 36px;
     }
@@ -312,12 +317,6 @@
 
     .banner-img-wrap {
       width: 100%;
-    }
-
-    .banner-img-wrap img {
-      width: 100%;
-      height: auto;
-      object-fit: contain;
     }
 
     /* CTA na metade direita, centralizada verticalmente */
@@ -445,88 +444,77 @@
     pointer-events: none;
   }
 
-  .cf-controls {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 24px;
-    margin-top: 32px;
-  }
-
-  .cf-btn {
+  /* ─── URGENCY BAR ─── */
+  .urgency-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 9999;
     background: #E01F1F;
-    color: #fff;
-    border: 2px solid #000;
-    border-radius: 50%;
-    width: 44px;
-    height: 44px;
-    font-size: 20px;
-    font-weight: 900;
-    cursor: pointer;
+    border-bottom: 2px solid var(--black);
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 4px 4px 0 #000;
-    transition: transform 0.15s, box-shadow 0.15s;
-    user-select: none;
-  }
-
-  .cf-btn:active {
-    transform: translate(2px, 2px);
-    box-shadow: 2px 2px 0 #000;
-  }
-
-  .cf-counter {
+    gap: 10px;
+    padding: 10px 16px;
     font-family: 'Cabinet Grotesk', sans-serif;
     font-size: 15px;
     font-weight: 700;
-    color: #888;
-    min-width: 50px;
+    color: var(--black);
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
   }
 
-  .cf-dots {
-    display: flex;
-    justify-content: center;
-    gap: 8px;
-    margin-top: 20px;
-  }
-
-  .cf-dots span {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: #333;
-    cursor: pointer;
-    transition: all 0.2s;
+  .urgency-clock {
+    font-size: 20px;
     display: inline-block;
+    animation: clockTick 1s steps(1) infinite;
   }
 
-  .cf-dots span.active {
-    background: #E01F1F;
-    transform: scale(1.4);
+  @keyframes clockTick {
+    0%   { transform: rotate(0deg); }
+    25%  { transform: rotate(6deg); }
+    50%  { transform: rotate(0deg); }
+    75%  { transform: rotate(-6deg); }
+    100% { transform: rotate(0deg); }
+  }
+
+  .urgency-timer {
+    font-size: 20px;
+    font-weight: 800;
+    letter-spacing: 1px;
   }
 </style>
 </head>
 <body>
 
+<!-- ═══════════════════════════════════ -->
+<!--         BARRA DE URGÊNCIA          -->
+<!-- ═══════════════════════════════════ -->
+<div class="urgency-bar">
+  <span class="urgency-clock">⏰</span>
+  <span>VAGAS GRATUITAS EXPIRAM EM</span>
+  <span class="urgency-timer" id="urgency-timer">09:59</span>
+</div>
+
 <div class="page-wrapper">
 
   <!-- ═══════════════════════════════════ -->
-  <!--        SEÇÃO 1: BANNER VERMELHO     -->
+  <!--        SEÇÃO 1: BANNER             -->
   <!-- ═══════════════════════════════════ -->
   <section class="banner">
 
-    <!-- Notas de dinheiro flutuantes ao redor -->
-    <div class="money-note" style="top:6%;left:3%;--dur:2.8s;--delay:0s;--rot-from:-15deg;--rot-to:5deg;">💵</div>
-    <div class="money-note" style="top:14%;right:4%;--dur:2.6s;--delay:0.7s;--rot-from:-8deg;--rot-to:12deg;">💵</div>
-    <div class="money-note" style="top:50%;left:2%;--dur:3.5s;--delay:0.2s;--rot-from:12deg;--rot-to:-10deg;font-size:22px;">💰</div>
-    <div class="money-note" style="top:58%;right:3%;--dur:3s;--delay:0.9s;--rot-from:-10deg;--rot-to:8deg;font-size:20px;">💵</div>
-    <div class="money-note" style="top:80%;left:4%;--dur:4s;--delay:1.1s;--rot-from:5deg;--rot-to:-12deg;font-size:18px;">💴</div>
-    <div class="money-note" style="top:86%;right:5%;--dur:3.3s;--delay:0.5s;--rot-from:-6deg;--rot-to:10deg;font-size:20px;">💵</div>
-
-    <!-- Banner completo (imagem) -->
+    <!-- VSL 9:16 -->
     <div class="banner-img-wrap">
-      <img src="https://i.imgur.com/Zf6dlS3.webp" alt="Concorra a 160 dos Sonhos - Honda CG" loading="eager">
+      <div class="video-wrap">
+        <iframe
+          src="https://www.youtube.com/embed/jEi767eOoeY?autoplay=1&mute=1&loop=1&playlist=jEi767eOoeY&controls=1&rel=0&playsinline=1"
+          allow="autoplay; encrypted-media"
+          allowfullscreen
+          loading="eager">
+        </iframe>
+      </div>
     </div>
 
   </section>
@@ -596,7 +584,7 @@
     <p class="cta-footer" style="margin-top: 24px;">VOCÊ PODE SER O PRÓXIMO 👇🏼</p>
 
     <div style="padding: 32px 24px 0;">
-      <a href="https://t.me/+3C7LvYC5XEwwMWQx" class="cta-btn"><img src="https://i.imgur.com/PjhaRCY.png" style="height:20px;vertical-align:middle;margin-right:8px;"> QUERO PARTICIPAR AGORA</a>
+      <a href="https://t.me/+3C7LvYC5XEwwMWQx" class="cta-btn"><img src="https://i.imgur.com/PjhaRCY.png" style="height:20px;vertical-align:middle;margin-right:8px;"> QUERO ENTRAR AGORA</a>
     </div>
   </section>
 
@@ -621,12 +609,10 @@
     btn.addEventListener('click', function(e) {
       e.preventDefault();
 
-      // Dispara evento de Lead no Meta Pixel
       if (typeof fbq === 'function') {
         fbq('track', 'Lead');
       }
 
-      // Efeito ripple
       const ripple = document.createElement('span');
       const rect = btn.getBoundingClientRect();
       const size = Math.max(rect.width, rect.height);
@@ -644,7 +630,6 @@
       btn.appendChild(ripple);
       setTimeout(() => ripple.remove(), 500);
 
-      // Redireciona após registrar o Lead (se houver destino real)
       const href = btn.getAttribute('href');
       if (href && href !== '#') {
         setTimeout(() => { window.location.href = href; }, 300);
@@ -658,8 +643,6 @@
     const total = items.length;
     let current = 0;
     let timer;
-
-    const dotsEl = null;
 
     function goTo(index) {
       current = (index + total) % total;
@@ -680,7 +663,6 @@
       timer = setInterval(() => goTo(current + 1), 2500);
     }
 
-    // Swipe touch
     let touchStartX = 0;
     const cf = document.getElementById('coverflow');
     cf.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
@@ -691,6 +673,19 @@
 
     goTo(0);
     resetTimer();
+  })();
+
+  // Timer de urgência — 9 min 59 s, para em 00:00
+  (function() {
+    let total = 9 * 60 + 59;
+    const el = document.getElementById('urgency-timer');
+    const tick = setInterval(() => {
+      if (total <= 0) { clearInterval(tick); el.textContent = '00:00'; return; }
+      total--;
+      const m = String(Math.floor(total / 60)).padStart(2, '0');
+      const s = String(total % 60).padStart(2, '0');
+      el.textContent = m + ':' + s;
+    }, 1000);
   })();
 
   const style = document.createElement('style');
